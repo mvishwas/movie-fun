@@ -29,10 +29,9 @@ import java.util.List;
 @Repository
 public class AlbumsBean {
 
-    @PersistenceContext(name = "albums")
+    @PersistenceContext(unitName = "albums")
     private EntityManager albumsEntityManager;
 
-    @Transactional
     public void addAlbum(Album album) {
         albumsEntityManager.persist(album);
     }
@@ -40,6 +39,7 @@ public class AlbumsBean {
     public List<Album> getAlbums() {
         CriteriaQuery<Album> cq = albumsEntityManager.getCriteriaBuilder().createQuery(Album.class);
         cq.select(cq.from(Album.class));
+        System.out.print("--------------" + albumsEntityManager.createQuery(cq).getResultList().size());
         return albumsEntityManager.createQuery(cq).getResultList();
     }
 }

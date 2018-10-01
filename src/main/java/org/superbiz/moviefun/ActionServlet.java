@@ -17,14 +17,11 @@
 package org.superbiz.moviefun;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.superbiz.moviefun.movies.Movie;
 import org.superbiz.moviefun.movies.MoviesBean;
 
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,11 +41,11 @@ public class ActionServlet extends HttpServlet {
 
     public ActionServlet(MoviesBean moviesBean, PlatformTransactionManager moviesTransactionManager) {
         this.moviesBean = moviesBean;
-        this.platformTransactionManager = moviesTransactionManager;
+        this.moviesTransactionManager = moviesTransactionManager;
     }
 
     private MoviesBean moviesBean;
-    private PlatformTransactionManager platformTransactionManager;
+    private PlatformTransactionManager moviesTransactionManager;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
